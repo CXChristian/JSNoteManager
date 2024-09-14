@@ -6,58 +6,55 @@ class Note {
 }
 
 class noteRow {
-    constructor() {
-        this.textField = document.createElement('div');
+    constructor(notesDiv) {
+        this.notesDiv = notesDiv;
+        this.row = document.createElement('div');
+
+        this.textField = document.createElement('textarea');
         this.textField.className = 'text-field';
         this.textField.contentEditable = true;
         this.textField.spellcheck = false;
         this.textField.addEventListener('input', () => {
-            console.log(this.textField.innerText);
-            this.note.content = this.textField.innerText;
-            this.save();
+            console.log(this.textField.value);
+            this.note.content = this.textField.value;
         });
-
+        
         this.deleteButton = document.createElement('button');
         this.deleteButton.className = 'delete-button';
-        this.deleteButton.innerText = 'Delete';
+        this.deleteButton.innerText = 'remove';
         this.deleteButton.addEventListener('click', () => {
-            this.delete();
+            this.notesDiv.removeChild(this.row);
+            
         });
-    }
 
-    buildRow() {
-        const row = document.createElement('div');
-        row.appendChild(this.textField);
-        row.appendChild(this.deleteButton);
-        return row;
+        this.row.appendChild(this.textField);
+        this.row.appendChild(this.deleteButton);
     }
 }
 
 class Manager {
     constructor() {
-        this.noteDiv = document.getElementById('noteDiv');
+        this.notesDiv = document.getElementById('notesDiv');
         this.notes = localStorage.getItem('notes') ? JSON.parse(localStorage.getItem('notes')) : [];
     }
     
-
+    
     createNote() {
-        let divRow = new noteRow();  
-        let newNoteRow = divRow.buildRow();      
+        let noteDiv = new noteRow(this.notesDiv);  
         let note = new Note(this.notes.length, '');
-
         this.notes.push(note);
-        this.noteDiv.appendChild(newNoteRow);
+        this.notesDiv.appendChild(noteDiv.row);
         localStorage.setItem('notes', JSON.stringify(this.notes));
     }    
-
+    
     updateNotes() {
         
     }
-
+    
     readAllNotes() {
         return this.notes;
     }
-
+    
     refreshNotes() {
         localStorage.getItem('notes') ? this.notes = JSON.parse(localStorage.getItem('notes')) : this.notes = [];
     }
@@ -67,7 +64,7 @@ function initalizeNoteDiv() {
     manager.createNote();
 }
 
-let manager = new Manager();
+const manager = new Manager();
 setInterval(() => {
     manager.refreshNotes();
 }, 2000);
