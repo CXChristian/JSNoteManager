@@ -137,7 +137,7 @@ class Reader {
     }
 }
 
-window.initalizeNoteDiv = function() {
+window.initalizeNoteDiv = function() {  // need window for module type script
     manager.createNote();
 }
 
@@ -150,36 +150,27 @@ function getCurrentTime() {
 }
 
 function buildComponents(notesDiv) {
+    const indexPage = document.getElementById('indexPage')
     const timerTitle = document.getElementById('timerTitle');
+    const backButton = document.getElementById('backButton');
+    const addButton = document.getElementById('addButton');
+    const title = document.getElementById('title');
+    const author = document.getElementById('author');
+    const writerButton = document.getElementById('writerButton');
+    const readerButton = document.getElementById('readerButton');
 
     if(notesDiv) {  // Writer Page
-        const addButton = document.getElementById('addButton');
         addButton.innerText = components.addButton;
-
         timerTitle.innerText = messages.writerTimerTitle;
-
-        const backButton = document.getElementById('backButton');
         backButton.innerText = components.backButton;
-    } else if(document.getElementById('title') && document.getElementById('title')) { // Index Page
-        const title = document.getElementById('title');
+    } else if(indexPage != null) { // Index Page
         title.innerText = messages.indexTitle;
-
-        const author = document.getElementById('author');
         author.innerText = messages.author;
-
-        const writerButton = document.getElementById('writerButton');
         writerButton.innerText = components.writerButton;
-
-        const readerButton = document.getElementById('readerButton');
         readerButton.innerText = components.readerButton;
     } else {  // Reader Page
         timerTitle.innerText = messages.readerTimerTitle;
-
-        const backButton = document.getElementById('backButton');
         backButton.innerText = components.backButton;
     }
-
-
-
 }
 
