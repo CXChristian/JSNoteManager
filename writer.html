@@ -7,12 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <p>Stored at:</p><div id="updateTime"></div>
+    <p id="timerTitle">Stored at:</p><div id="updateTime"></div>
     <div id="writeDiv">
         <div id="notesDiv"></div>
-        <div id="addButton" onclick="initalizeNoteDiv()">add</div>
+        <div id="addButton" onclick="initalizeNoteDiv()"></div>
     </div>
-    <button onclick="window.location.href='index.html'">Back</button>
+    <button id="backButton" onclick="window.location.href='index.html'"></button>
 </body>
 </html>
-<script src="js/script.js"></script>
+<script type="module" src="lang/messages/en/user.js"></script>
+<script type="module" src="js/script.js"></script>

@@ -1,7 +1,11 @@
+import { messages, components } from  "../lang/messages/en/user.js";
+
 let manager;
 document.addEventListener('DOMContentLoaded', () => {
     const notesDiv = document.getElementById('notesDiv');
     const timeDiv = document.getElementById('updateTime');
+    
+    buildComponents(notesDiv);
 
     if (notesDiv) {
         manager = new Manager();
@@ -46,7 +50,7 @@ class noteRow {
         if (writer) {    
             this.deleteButton = document.createElement('button');
             this.deleteButton.className = 'delete-button';
-            this.deleteButton.innerText = 'remove';
+            this.deleteButton.innerText = components.removeButton;
             this.deleteButton.addEventListener('click', () => {
                 this.notesDiv.removeChild(this.row);
                 manager.notes = manager.notes.filter(n => n.id !== this.note.id);
@@ -131,7 +135,7 @@ class Reader {
     }
 }
 
-function initalizeNoteDiv() {
+window.initalizeNoteDiv = function() {
     manager.createNote();
 }
 
@@ -142,3 +146,22 @@ function getCurrentTime() {
     const seconds = now.getSeconds().toString().padStart(2, '0');
     return `${hours}:${minutes}:${seconds}`;
 }
+
+function buildComponents(notesDiv) {
+    const timerTitle = document.getElementById('timerTitle');
+
+    if(notesDiv) {
+        const addButton = document.getElementById('addButton');
+        addButton.innerText = components.addButton;
+
+        timerTitle.innerText = messages.writerTimerTitle;
+    } else {
+        timerTitle.innerText = messages.readerTimerTitle;
+    }
+
+    const backButton = document.getElementById('backButton');
+    backButton.innerText = components.backButton;
+
+
+}
+

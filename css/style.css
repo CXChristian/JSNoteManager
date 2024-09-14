@@ -15,6 +15,7 @@ body {
     width: 250px;
     height: 100px;
     background-color: blue;
+    color: white;
 }
 
 .delete-button {
