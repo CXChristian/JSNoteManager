@@ -4,19 +4,21 @@ let manager;
 document.addEventListener('DOMContentLoaded', () => {
     const notesDiv = document.getElementById('notesDiv');
     const timeDiv = document.getElementById('updateTime');
+    const indexPage = document.getElementById('indexPage');
     
     buildComponents(notesDiv);
-
-    if (notesDiv) {
-        manager = new Manager();
-    } else {
-        manager = new Reader();
+    if (indexPage == null) {   
+        if (notesDiv) {
+            manager = new Manager();
+        } else {
+            manager = new Reader();
+        }
+        
+        setInterval(() => {
+            manager.updateNotes();
+            timeDiv.innerText = getCurrentTime();
+        }, 2000);
     }
-
-    setInterval(() => {
-        manager.updateNotes();
-        timeDiv.innerText = getCurrentTime();
-    }, 2000);
 });
 
 class Note {
@@ -150,17 +152,33 @@ function getCurrentTime() {
 function buildComponents(notesDiv) {
     const timerTitle = document.getElementById('timerTitle');
 
-    if(notesDiv) {
+    if(notesDiv) {  // Writer Page
         const addButton = document.getElementById('addButton');
         addButton.innerText = components.addButton;
 
         timerTitle.innerText = messages.writerTimerTitle;
-    } else {
+
+        const backButton = document.getElementById('backButton');
+        backButton.innerText = components.backButton;
+    } else if(document.getElementById('title') && document.getElementById('title')) { // Index Page
+        const title = document.getElementById('title');
+        title.innerText = messages.indexTitle;
+
+        const author = document.getElementById('author');
+        author.innerText = messages.author;
+
+        const writerButton = document.getElementById('writerButton');
+        writerButton.innerText = components.writerButton;
+
+        const readerButton = document.getElementById('readerButton');
+        readerButton.innerText = components.readerButton;
+    } else {  // Reader Page
         timerTitle.innerText = messages.readerTimerTitle;
+
+        const backButton = document.getElementById('backButton');
+        backButton.innerText = components.backButton;
     }
 
-    const backButton = document.getElementById('backButton');
-    backButton.innerText = components.backButton;
 
 
 }

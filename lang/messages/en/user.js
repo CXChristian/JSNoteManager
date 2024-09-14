@@ -2,7 +2,7 @@ export const messages = {
     indexTitle:  "Lab 1: JSON, Object Constructor, localStorage",
     author: "Conrad Christian",
     writerTimerTitle: "Stored at: ",
-    writerTimerTitle: "Updated at: ",
+    readerTimerTitle: "Updated at: ",
 }
 
 export const components = {
