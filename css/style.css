@@ -1,0 +1,27 @@
+body {
+    margin: 0px;
+}
+
+#addButton {
+    background-color: green;
+    width: 75px;
+    text-align: center;
+    vertical-align:middle;
+    color: white;
+    cursor: pointer;
+}
+
+.text-field {
+    width: 250px;
+    height: 100px;
+    background-color: blue;
+}
+
+.delete-button {
+    background-color: red;
+    width: 75px;
+    text-align: center;
+    vertical-align:middle;
+    color: white;
+    cursor: pointer;
+}
